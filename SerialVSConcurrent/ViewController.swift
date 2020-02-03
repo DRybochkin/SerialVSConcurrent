@@ -31,14 +31,20 @@ final class ViewController: UIViewController {
 
     @IBAction func serialTap() {
         self.serialLabel.text = ""
-        DispatchQueue.main.async {
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else {
+                return
+            }
             self.startSerial()
         }
     }
 
     @IBAction func concurrentTap() {
         self.concurrentLabel.text = ""
-        DispatchQueue.main.async {
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else {
+                return
+            }
             self.startConcurent()
         }
     }
